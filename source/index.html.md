@@ -44,7 +44,7 @@ Content-Type: application/json
 Except POST /login, every request must be authenticated with the user's token
 
 # Rate Limit
-To avoid abuse and ensure that the system remains online for every user, API requests will need to use a token and the requests can be rate limited if the exceed they limitations.
+To avoid abuse and ensure that the system remains online for every user, API requests will need to use a token and the requests can be rate limited if they exceed the limitations.
 
 TBD: Rate limit proposal 60 calls per minute.
 
