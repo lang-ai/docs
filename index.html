@@ -1,0 +1,405 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #272822;
+  background-color: #f92672;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #f8f8f2;
+}
+.highlight .p, .highlight .pi {
+  color: #f8f8f2;
+}
+.highlight .gi {
+  color: #a6e22e;
+}
+.highlight .gd {
+  color: #f92672;
+}
+.highlight .gh {
+  color: #66d9ef;
+  background-color: #272822;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #ae81ff;
+}
+.highlight .kc {
+  color: #fd971f;
+}
+.highlight .kt {
+  color: #fd971f;
+}
+.highlight .kd {
+  color: #fd971f;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #a6e22e;
+}
+.highlight .sr {
+  color: #a1efe4;
+}
+.highlight .si {
+  color: #cc6633;
+}
+.highlight .se {
+  color: #cc6633;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #66d9ef;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #a6e22e;
+}
+.highlight .ss {
+  color: #a6e22e;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="http://lang.ai" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a href="http://lang.ai" title="Go to Lang.AI website"><img src="images/logo-blue.svg" class="logo" alt="Logo"/></a>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='http://lang.ai'>Sign Up for a Developer Key</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="overview">Overview</h1>
+
+<ul>
+<li>This document describes the API for lang.ai.</li>
+<li>All requests must be encrypted with https.</li>
+<li>Except POST /login, every request must be authenticated with the user&rsquo;s token</li>
+<li>The service will be hosted under api.lang.ai</li>
+</ul>
+
+<h1 id="authentication">Authentication</h1>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/v1/login</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">MyClient/1.0.0</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/vnd.lang-ai.2+json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.lang.ai</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"your@email.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"pass"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yourpassword"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>The above command returns your authentication token:</p>
+</blockquote>
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{</span><span class="nt">"token"</span><span class="p">:</span><span class="s2">"YOUR LANG.AI TOKEN"</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Except POST /login, every request must be authenticated with the user&rsquo;s token</p>
+
+<h1 id="rate-limit">Rate Limit</h1>
+
+<p>To avoid abuse and ensure that the system remains online for every user, API requests will need to use a token and the requests can be rate limited if the exceed the limitations.</p>
+
+<p>TBD: Rate limit proposal 60 calls per minute.</p>
+
+<h1 id="categories">Categories</h1>
+
+<p>Retrieves a list of available categories with its description.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.lang.ai/v1/categories</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+ </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category Name"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brief description of what this category means"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category Name"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brief description of what this category means"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+ </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>true</td>
+<td>-</td>
+<td>The user token</td>
+</tr>
+<tr>
+<td>lang</td>
+<td>false</td>
+<td>en</td>
+<td>Valid params: &ldquo;es&rdquo; or &ldquo;en&rdquo;</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>false</td>
+<td>-</td>
+<td>A valid domain name. Categories list will include only categories that belong to this domain</td>
+</tr>
+<tr>
+<td>pattern</td>
+<td>false</td>
+<td>-</td>
+<td>A valid pattern name. Categories list will include only categories that belong to this pattern</td>
+</tr>
+</tbody></table>
+
+<h1 id="patterns">Patterns</h1>
+
+<p>Retrieves a list of available patterns with its description.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.lang.ai/v1/patterns</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+ </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pattern Name"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brief description of what this pattern means"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pattern Name"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brief description of what this pattern means"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+ </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>true</td>
+<td>-</td>
+<td>The user token</td>
+</tr>
+<tr>
+<td>lang</td>
+<td>false</td>
+<td>en</td>
+<td>Valid params: &ldquo;es&rdquo; or &ldquo;en&rdquo;</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>false</td>
+<td>-</td>
+<td>A valid domain name. Patterns list will include only categories that belong to this domain domain</td>
+</tr>
+</tbody></table>
+
+<h1 id="domains">Domains</h1>
+
+<p>Retrieves a list of available domains with its description.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.lang.ai/v1/domains</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+ </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Domain Name"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brief description of what this domain means"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Domain Name"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brief description of what this domain means"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+ </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>true</td>
+<td>-</td>
+<td>The user token</td>
+</tr>
+<tr>
+<td>lang</td>
+<td>false</td>
+<td>en</td>
+<td>Valid params: &ldquo;es&rdquo; or &ldquo;en&rdquo;</td>
+</tr>
+</tbody></table>
+
+<h1 id="analyze">Analyze</h1>
+
+<p>Analyzes a given text for an specific domain.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://api.lang.ai/v1/analyze</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+ </span><span class="nt">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POSITIVE|NEGATIVE|OBJECTIVE"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"patterns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"pattern1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"pattern2"</span><span class="p">],</span><span class="w">
+ </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"category1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"category2"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>true</td>
+<td>-</td>
+<td>string</td>
+<td>The user token</td>
+</tr>
+<tr>
+<td>lang</td>
+<td>false</td>
+<td>en</td>
+<td>string</td>
+<td>Valid params: &ldquo;es&rdquo; or &ldquo;en&rdquo;</td>
+</tr>
+<tr>
+<td>domains</td>
+<td>false</td>
+<td>-</td>
+<td>string</td>
+<td>Valid domain name</td>
+</tr>
+<tr>
+<td>targets</td>
+<td>false</td>
+<td>-</td>
+<td>array</td>
+<td>Entities to be analyzed</td>
+</tr>
+<tr>
+<td>private</td>
+<td>false</td>
+<td>false</td>
+<td>boolean</td>
+<td>If this field is included and is set to true, Lang.ai wont store any information or logs about that message.</td>
+</tr>
+</tbody></table>
+
+<h3 id="about-the-target-field-in-the-analyze-request">About the target field in the analyze request</h3>
+
+<p>This field is optional but, if it is available, this field is used for the entity that should receive the analysis/sentiment of the message. This field usually helps to avoid false positives increasing the accuracy.</p>
+
+          <h1 id="errors">Errors</h1>
+
+<p>If the request succeeded, the response status will be 200 OK. Otherwise the response status will be 4xx or 5xx as described in the following table:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request / Missing Fields</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests / Rate Limited</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
