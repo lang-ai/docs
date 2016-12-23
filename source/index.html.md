@@ -109,7 +109,7 @@ Parameter | Required | Default | Description
 --------- | -------  | ------- | -----------
 token     | true     | -       | The user token
 lang      | false    | en      | Valid params: "es" or "en"
-domain    | false    | -       | A valid domain name. Patterns list will include only categories that belong to this domain domain
+domain    | false    | -       | A valid domain name. Patterns list will include only categories that belong to this domain
 
 # Domains
 
