@@ -14,8 +14,8 @@ search: true
 
 * This document describes the API for lang.ai.
 * All requests must be encrypted with https.
-* Except POST /login, every request must be authenticated with the user's token
-* The service will be hosted under api.lang.ai
+* Except POST /login, every request must be authenticated with the user's token.
+* The service will be hosted under api.lang.ai.
 
 # Authentication
 
@@ -41,7 +41,7 @@ Content-Type: application/json
 {"token":"YOUR LANG.AI TOKEN"}
 ```
 
-Except POST /login, every request must be authenticated with the user's token
+Except POST /login, every request must be authenticated with the user's token.
 
 # Rate Limit
 To avoid abuse and ensure that the system remains online for every user, API requests will need to use a token and the requests can be rate limited if they exceed the limitations.
@@ -75,10 +75,10 @@ Retrieves a list of available categories with its description.
 
 Parameter | Required | Default | Description
 --------- | -------  | ------- | -----------
-token     | true     | -       |   The user token
-lang      | false    | en      | Valid params: "es" or "en"
-domain    | false    | -    | A valid domain name. Categories list will include only categories that belong to this domain
-pattern    | false    | -   | A valid pattern name. Categories list will include only categories that belong to this pattern
+token     | true     | -       |   The user token.
+lang      | false    | en      | Valid params: "es" or "en".
+domain    | false    | -    | A valid domain name. Categories list will include only categories that belong to this domain.
+pattern    | false    | -   | A valid pattern name. Categories list will include only categories that belong to this pattern.
 
 # Patterns
 
@@ -107,9 +107,9 @@ Retrieves a list of available patterns with its description.
 
 Parameter | Required | Default | Description
 --------- | -------  | ------- | -----------
-token     | true     | -       | The user token
-lang      | false    | en      | Valid params: "es" or "en"
-domain    | false    | -       | A valid domain name. Patterns list will include only categories that belong to this domain
+token     | true     | -       | The user token.
+lang      | false    | en      | Valid params: "es" or "en".
+domain    | false    | -       | A valid domain name. Patterns list will include only patterns that belong to this domain.
 
 # Domains
 
@@ -138,8 +138,8 @@ Retrieves a list of available domains with its description.
 
 Parameter | Required | Default | Description
 --------- | -------  | ------- | -----------
-token     | true     | -       | The user token
-lang      | false    | en      | Valid params: "es" or "en"
+token     | true     | -       | The user token.
+lang      | false    | en      | Valid params: "es" or "en".
 
 # Analyze
 
@@ -161,10 +161,10 @@ Analyzes a given text for an specific domain.
 
 Parameter | Required | Default | Type | Description
 --------- | -------  | ------- | ---- | -----------
-token     | true     | -       | string | The user token
-lang      | false    | en      | string | Valid params: "es" or "en"
-domains   | false    | -       | string | Valid domain name
-targets   | false    | -       | array | Entities to be analyzed
+token     | true     | -       | string | The user token.
+lang      | false    | en      | string | Valid params: "es" or "en".
+domains   | false    | -       | string | Valid domain name.
+targets   | false    | -       | array | Entities to be analyzed.
 private   | false    | false   | boolean | If this field is included and is set to true, Lang.ai wont store any information or logs about that message.
 
 ### About the target field in the analyze request
