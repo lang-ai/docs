@@ -75,7 +75,6 @@ Retrieves a list of available categories with its description.
 
 Parameter | Required | Default | Description
 --------- | -------  | ------- | -----------
-text     | true     | -       |   The text to be analyzed.
 token     | true     | -       |   The user token.
 lang      | false    | en      | Valid params: "es" or "en".
 domain    | false    | -    | A valid domain name. Categories list will include only categories that belong to this domain.
@@ -162,6 +161,7 @@ Analyzes a given text for an specific domain.
 
 Parameter | Required | Default | Type | Description
 --------- | -------  | ------- | ---- | -----------
+text     | true     | -       |   string | The text to be analyzed.
 token     | true     | -       | string | The user token.
 lang      | false    | en      | string | Valid params: "es" or "en".
 domains   | false    | -       | string | Valid domain name.
