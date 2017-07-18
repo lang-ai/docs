@@ -20,15 +20,19 @@ under the License.
 ////////////////////////////////////////////////////////////////////////////////
 // Use these settings to help adjust the appearance of Slate
 
+$purple: #3E4EB8;
+$gray: #EEF2F5;
+$lightGray: #EAECF7;
+$blue: #00A7F7;
 
 // BACKGROUND COLORS
 ////////////////////
-$nav-bg: #F8F8F8 !default;
-$examples-bg: #393939 !default;
+$nav-bg: #FFFFFF !default;
+$examples-bg: $gray !default;
 $code-bg: #292929 !default;
 $code-annotation-bg: #1c1c1c !default;
 $nav-subitem-bg: #262626 !default;
-$nav-active-bg: #29618E !default;
+$nav-active-bg: $purple !default;
 $lang-select-border: #000 !default;
 $lang-select-bg: #222 !default;
 $lang-select-active-bg: $examples-bg !default; // feel free to change this to blue or something
@@ -38,12 +42,13 @@ $aside-notice-bg: #8fbcd4 !default;
 $aside-warning-bg: #c97a7e !default;
 $aside-success-bg: #6ac174 !default;
 $search-notice-bg: #c97a7e !default;
+$link-color: $blue !default;
 
 
 // TEXT COLORS
 ////////////////////
-$main-text: #333 !default; // main content text color
-$nav-text: #29618E !default;
+$main-text: #4C555A !default; // main content text color
+$nav-text: $purple !default;
 $nav-active-text: #fff !default;
 $lang-select-text: #fff !default; // color of unselected language tab text
 $lang-select-active-text: #fff !default; // color of selected language tab text
@@ -75,8 +80,9 @@ $phone-width: $tablet-width - $nav-width !default; // min width before reverting
 }
 
 %header-font {
-  font-family: "Titillium Web", Helvetica, Arial, "Microsoft Yahei","微软雅黑", STXihei, "华文细黑", sans-serif;
-  font-weight: bold;
+  font-family: "Open Sansb", Helvetica, Arial, "Microsoft Yahei","微软雅黑", STXihei, "华文细黑", sans-serif;
+  font-weight: 500;
+  color: $nav-text;
 }
 
 %code-font {
@@ -93,7 +99,7 @@ $nav-footer-border-color: #666 !default;
 $nav-embossed-border-top: #000 !default;
 $nav-embossed-border-bottom: #939393 !default;
 $main-embossed-text-shadow: 0px 1px 0px #fff !default;
-$search-box-border-color: #666 !default;
+$search-box-border-color: $lightGray !default;
 
 
 ////////////////////////////////////////////////////////////////////////////////
