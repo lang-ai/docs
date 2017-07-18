@@ -14,136 +14,33 @@ search: true
 
 * This document describes the API for lang.ai.
 * All requests must be encrypted with https.
-* Except POST /login, every request must be authenticated with the user's token.
-* The service will be hosted under api.lang.ai.
+* The service is hosted under api.lang.ai.
 
 # Authentication
 
 ```http
-POST /v1/login HTTP/1.1
+POST /v1/analyze HTTP/1.1
 User-Agent: MyClient/1.0.0
-Accept: application/vnd.lang-ai.2+json
 Host: api.lang.ai
 Content-Type: application/json
+Authentication: Bearer my-api-token
 
-{
-  "email":"your@email.com",
-  "pass": "yourpassword"
-}
 ```
 
-> The above command returns your authentication token:
+Authenticate your account when using the API by including your secret API token in every request. You can manage your API tokens in the [Console](http://console.lang.ai). Do not share your secret API tokens in publicly accessible areas such GitHub, client-side code, and so forth.
 
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
+Authentication to the API is performed via bearer auth tokens which can be retrieved from the Console. We will never ask you to send any password while using the API.
 
-{"token":"YOUR LANG.AI TOKEN"}
-```
+Every request must be authenticated with the your API token.
 
-Except POST /login, every request must be authenticated with the user's token.
 
 # Rate Limit
-To avoid abuse and ensure that the system remains online for every user, API requests will need to use a token and the requests can be rate limited if they exceed the limitations.
+To avoid abuse and ensure that the system remains online for every user, every API request will need to provide valid credentials and the requests can be rate limited if they exceed the limitations.
 
-TBD: Rate limit proposal 60 calls per minute.
-
-# Categories
-
-Retrieves a list of available categories with its description.
-
-### HTTP Request
-
-`GET http://api.lang.ai/v1/categories`
-
-### Query Parameters
-
-```
-{
- "data": [
-  {
-   "name": "Category Name",
-   "description": "brief description of what this category means"
-  },
-  {
-   "name": "Category Name",
-   "description": "brief description of what this category means"
-  },
- ]
-}
-```
-
-Parameter | Required | Default | Description
---------- | -------  | ------- | -----------
-token     | true     | -       |   The user token.
-lang      | false    | en      | Valid params: "es" or "en".
-domain    | false    | -    | A valid domain name. Categories list will include only categories that belong to this domain.
-pattern    | false    | -   | A valid pattern name. Categories list will include only categories that belong to this pattern.
-
-# Patterns
-
-Retrieves a list of available patterns with its description.
-
-### HTTP Request
-
-`GET http://api.lang.ai/v1/patterns`
-
-### Query Parameters
-
-```
-{
- "data": [
-  {
-   "name": "Pattern Name",
-   "description": "brief description of what this pattern means"
-  },
-  {
-   "name": "Pattern Name",
-   "description": "brief description of what this pattern means"
-  },
- ]
-}
-```
-
-Parameter | Required | Default | Description
---------- | -------  | ------- | -----------
-token     | true     | -       | The user token.
-lang      | false    | en      | Valid params: "es" or "en".
-domain    | false    | -       | A valid domain name. Patterns list will include only patterns that belong to this domain.
-
-# Domains
-
-Retrieves a list of available domains with its description.
-
-### HTTP Request
-
-`GET http://api.lang.ai/v1/domains`
-
-### Query Parameters
-
-```
-{
- "data": [
-  {
-   "name": "Domain Name",
-   "description": "brief description of what this domain means"
-  },
-  {
-   "name": "Domain Name",
-   "description": "brief description of what this domain means"
-  },
- ]
-}
-```
-
-Parameter | Required | Default | Description
---------- | -------  | ------- | -----------
-token     | true     | -       | The user token.
-lang      | false    | en      | Valid params: "es" or "en".
 
 # Analyze
 
-Analyzes a given text for an specific domain.
+Analyzes a given text for any of you available classifiers. You can create and edit your classifiers from the [Console](http://console.lang.ai)
 
 ### HTTP Request
 
@@ -153,21 +50,12 @@ Analyzes a given text for an specific domain.
 
 ```
 {
- "sentiment": "POSITIVE|NEGATIVE|OBJECTIVE",
- "patterns": ["pattern1", "pattern2"],
- "categories": ["category1", "category2"]
+ "text": "POSITIVE|NEGATIVE|OBJECTIVE",
+ "classifier_id": "Your classifier id"
 }
 ```
 
 Parameter | Required | Default | Type | Description
 --------- | -------  | ------- | ---- | -----------
-text     | true     | -       |   string | The text to be analyzed.
-token     | true     | -       | string | The user token.
-lang      | false    | en      | string | Valid params: "es" or "en".
-domains   | false    | -       | string | Valid domain name.
-targets   | false    | -       | array | Entities to be analyzed.
-private   | false    | false   | boolean | If this field is included and is set to true, Lang.ai wont store any information or logs about that message.
-
-### About the target field in the analyze request
-
-This field is optional but, if it is available, this field is used for the entity that should receive the analysis/sentiment of the message. This field usually helps to avoid false positives increasing the accuracy.
+text      | true     | -       | string | The text to be analyzed.
+classifier_id | true | -       | string | The id for the classifier to be used.
