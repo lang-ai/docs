@@ -12,9 +12,13 @@ search: true
 
 # Overview
 
-* This document describes the API for lang.ai.
-* All requests must be encrypted with https.
-* The service is hosted under api.lang.ai.
+The Lang.ai API is organized around REST. Our API has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients.
+JSON is returned by all API responses, including errors, although the API libraries convert responses to appropriate language-specific objects.
+
+All requests must be encrypted with https.
+
+The service is hosted under api.lang.ai.
+
 
 # Authentication
 
@@ -40,7 +44,8 @@ To avoid abuse and ensure that the system remains online for every user, every A
 
 # Analyze
 
-Analyzes a given text for any of you available classifiers. You can create and edit your classifiers from your [Console](http://console.lang.ai)
+Analyzes a given text using the classifier specified.
+You can handle your available classifiers in your [Console](http://console.lang.ai).
 
 ### HTTP Request
 
