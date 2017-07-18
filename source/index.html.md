@@ -46,11 +46,11 @@ Analyzes a given text for any of you available classifiers. You can create and e
 
 `POST http://api.lang.ai/v1/analyze`
 
-### Query Parameters
+### Request Body
 
-```
+```json
 {
- "text": "POSITIVE|NEGATIVE|OBJECTIVE",
+ "text": "The text to be analyzed",
  "classifier_id": "Your classifier id"
 }
 ```
@@ -59,3 +59,13 @@ Parameter | Required | Default | Type | Description
 --------- | -------  | ------- | ---- | -----------
 text      | true     | -       | string | The text to be analyzed.
 classifier_id | true | -       | string | The id for the classifier to be used.
+
+### Response
+
+```json
+{
+  "result": {
+    "paterns": ["pattern1", "pattern2"]
+  }
+}
+```
