@@ -115,11 +115,12 @@
       <div class="content">
         <h1 id="overview">Overview</h1>
 
-<ul>
-<li>This document describes the API for lang.ai.</li>
-<li>All requests must be encrypted with https.</li>
-<li>The service is hosted under api.lang.ai.</li>
-</ul>
+<p>The Lang.ai API is organized around REST. Our API has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients.
+JSON is returned by all API responses, including errors, although the API libraries convert responses to appropriate language-specific objects.</p>
+
+<p>All requests must be encrypted with https.</p>
+
+<p>The service is hosted under api.lang.ai.</p>
 
 <h1 id="authentication">Authentication</h1>
 <pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/v1/analyze</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -141,15 +142,16 @@
 
 <h1 id="analyze">Analyze</h1>
 
-<p>Analyzes a given text for any of you available classifiers. You can create and edit your classifiers from your <a href="http://console.lang.ai">Console</a></p>
+<p>Analyzes a given text using the classifier specified.
+You can handle your available classifiers in your <a href="http://console.lang.ai">Console</a>.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">POST http://api.lang.ai/v1/analyze</code></p>
 
-<h3 id="query-parameters">Query Parameters</h3>
+<h3 id="request-body">Request Body</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
- </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POSITIVE|NEGATIVE|OBJECTIVE"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The text to be analyzed"</span><span class="p">,</span><span class="w">
  </span><span class="nt">"classifier_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your classifier id"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -178,6 +180,13 @@
 </tr>
 </tbody></table>
 
+<h3 id="response">Response</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"paterns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"pattern1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"pattern2"</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
           <h1 id="errors">Errors</h1>
 
 <p>If the request succeeded, the response status will be 200 OK. Otherwise the response status will be 4xx or 5xx as described in the following table:</p>
