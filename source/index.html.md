@@ -12,7 +12,7 @@ search: true
 
 # Overview
 
-Lang.ai is the first unsupervised AI for language understanding. It analyses any type of text and extracts intents without any manual training or intent-definition. This allows companies and individuals to get insights from any unstructured text to improve and automate multiple business processes. To learn more about use cases or our proprietary technology, please visit [lang.ai](https://lang.ai).
+Lang.ai is the first unsupervised AI for language understanding. It analyzes any type of text and extracts intents without any manual training or intent-definition. This allows companies and individuals to get insights from any unstructured text to improve and automate multiple business processes. To learn more about use cases or our proprietary technology, please visit [lang.ai](https://lang.ai).
 
 # Workflow
 
@@ -20,7 +20,7 @@ Lang.ai algorithm adapts to any language, industry or business case given the ad
 
 * In order to build a custom classifier model, user has to provide a dataset. This can be any collection of customer interactions or any other type of text.
 * The algorithm will automatically extract intents and features that the user can edit to further customise to her needs. This process is done in the [Console](https://console.lang.ai).
-* Once the classifier model is validated, the lang.ai API can be used in real time to analyse intents in new texts.
+* Once the classifier model is validated, the lang.ai API can be used in real time to analyze intents in new texts.
 
 # The API
 
@@ -67,14 +67,14 @@ You can handle your available classifiers in your [Console](https://console.lang
 ```json
 {
  "text": "The text to be analyzed",
- "classifier_id": "Your classifier id"
+ "project_id": "Your classifier id"
 }
 ```
 
 Parameter | Required | Default | Type | Description
 --------- | -------  | ------- | ---- | -----------
 text      | true     | -       | string | The text to be analyzed.
-classifier_id | true | -       | string | The id for the classifier to be used.
+project_id | true | -       | string | The project to be used to analyze the text.
 
 ### Response
 
