@@ -67,7 +67,7 @@ You can handle your available classifiers in your [Console](https://console.lang
 ```json
 {
  "text": "The text to be analyzed",
- "project_id": "Your classifier id"
+ "project_id": "Your project id"
 }
 ```
 
