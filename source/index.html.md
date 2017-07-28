@@ -38,13 +38,13 @@ POST /v1/analyze HTTP/1.1
 User-Agent: MyClient/1.0.0
 Host: api.lang.ai
 Content-Type: application/json
-Authentication: Bearer my-api-token
+Authorization: Bearer my-api-token
 
 ```
 
 Authenticate your account when using the API by including your secret API token in every request. You can manage your API tokens in your [Console](https://console.lang.ai). Do not share your secret API tokens in publicly accessible areas such GitHub, client-side code, and so forth.
 
-Authentication to the API is performed via bearer auth tokens which can be retrieved from the Console. We will never ask you to send any password while using the API.
+Authorization to the API is performed via bearer auth tokens which can be retrieved from the Console. We will never ask you to send any password while using the API.
 
 Every request must be authenticated with the your API token.
 
