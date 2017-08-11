@@ -33,13 +33,11 @@ The service is hosted under api.lang.ai.
 
 # Authentication
 
-```http
-POST /v1/analyze HTTP/1.1
-User-Agent: MyClient/1.0.0
-Host: api.lang.ai
-Content-Type: application/json
-Authorization: Bearer my-api-token
-
+```shell
+curl https://api.lang.ai/v1/analyze \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -X POST -d '{"text": "The Text", "projectId": "YOUR_PROJECT_ID"}'
 ```
 
 Authenticate your account when using the API by including your secret API token in every request. You can manage your API tokens in your [Console](https://console.lang.ai). Do not share your secret API tokens in publicly accessible areas such GitHub, client-side code, and so forth.
