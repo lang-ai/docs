@@ -65,21 +65,19 @@ You can handle your available classifiers in your [Console](https://console.lang
 ```json
 {
  "text": "The text to be analyzed",
- "project_id": "Your project id"
+ "projectId": "Your project id"
 }
 ```
 
 Parameter | Required | Default | Type | Description
 --------- | -------  | ------- | ---- | -----------
 text      | true     | -       | string | The text to be analyzed.
-project_id | true | -       | string | The project to be used to analyze the text.
+projectId | true | -       | string | The project to be used to analyze the text.
 
 ### Response
 
 ```json
 {
-  "result": {
-    "intents": ["intent1", "intent2"]
-  }
+  "intents": ["intent1", "intent2"]
 }
 ```
