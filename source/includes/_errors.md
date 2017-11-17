@@ -4,8 +4,8 @@ If the request succeeded, the response status will be 200 OK. Otherwise the resp
 
 Error Code | Meaning
 ---------- | -------
-400 | Bad Request / Missing Fields
+400 | Bad request / Missing fields
 401 | Unauthorized
-404 | Not Found
-429 | Too Many Requests / Rate Limited
-500 | Internal Server Error
+404 | Project not found
+429 | Too many requests / Rate limited
+500 | Internal server error
