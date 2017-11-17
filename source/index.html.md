@@ -72,7 +72,7 @@ You can handle your available classifiers in your [Console](https://console.lang
 Parameter | Required | Default | Type | Description
 --------- | -------  | ------- | ---- | -----------
 text      | true     | -       | string | The text to be analyzed.
-projectId | true | -       | string | The project to be used to analyze the text.
+projectId | true     | -       | string | The project to be used to analyze the text.
 
 ### Response
 
