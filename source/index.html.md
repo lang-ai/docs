@@ -78,6 +78,11 @@ projectId | true     | -       | string | The project to be used to analyze the 
 
 ```json
 {
-  "intents": ["intent1", "intent2"]
+  "intents": [
+  	{
+  		"name": "intent1",
+  		"features": ["feature1"]
+  	}
+  ]
 }
 ```
