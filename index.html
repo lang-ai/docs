@@ -107,7 +107,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='http://lang.ai'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://lang.ai/developers'>Request an API Invite</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -115,24 +115,37 @@
       <div class="content">
         <h1 id="overview">Overview</h1>
 
-<p>The Lang.ai API is organized around REST. Our API has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients.
-JSON is returned by all API responses, including errors, although the API libraries convert responses to appropriate language-specific objects.</p>
+<p>Lang.ai is a platform to enable the next generation of NLP products and applications while using unsupervised AI. It analyzes any type of text and extracts intents without any manual training or intent-definition. This allows companies and individuals to get insights from any unstructured text to improve and automate multiple business processes. To learn more about use cases or our proprietary technology, please visit <a href="https://lang.ai">lang.ai</a>.</p>
 
-<p>All requests must be encrypted with https.</p>
+<h1 id="workflow">Workflow</h1>
+
+<p>Lang.ai algorithm adapts to any language, industry or business case given the adequate training data. The typical workflow for using lang.ai API is the following:</p>
+
+<ul>
+<li>In order to build a custom classifier model, user has to provide a dataset. This can be any collection of customer interactions or any other type of text.</li>
+<li>The algorithm will automatically extract intents and features that the user can edit to further customize to her needs. This process is done in the <a href="https://console.lang.ai">Console</a>.</li>
+<li>Once the classifier model is validated, the lang.ai API can be used in real time to analyze intents in new texts.</li>
+</ul>
+
+<h1 id="the-api">The API</h1>
+
+<p>The API is organized around REST. It has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients. JSON is returned by all API responses, including errors, although the API libraries convert responses to appropriate language-specific objects.</p>
+
+<p>All requests must be encrypted with HTTPS.</p>
 
 <p>The service is hosted under api.lang.ai.</p>
 
+<p>For more information about our API libraries and use cases, check our <a href="https://lang.ai/developers">Developers site</a>.</p>
+
 <h1 id="authentication">Authentication</h1>
-<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/v1/analyze</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">User-Agent</span><span class="p">:</span> <span class="s">MyClient/1.0.0</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.lang.ai</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Authentication</span><span class="p">:</span> <span class="s">Bearer my-api-token</span>
-
+<pre class="highlight shell"><code>curl https://api.lang.ai/v1/analyze <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer YOUR_TOKEN"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -X POST -d <span class="s1">'{"text": "The Text", "projectId": "YOUR_PROJECT_ID"}'</span>
 </code></pre>
-<p>Authenticate your account when using the API by including your secret API token in every request. You can manage your API tokens in your <a href="http://console.lang.ai">Console</a>. Do not share your secret API tokens in publicly accessible areas such GitHub, client-side code, and so forth.</p>
+<p>Authenticate your account when using the API by including your secret API token in every request. You can manage your API tokens in your <a href="https://console.lang.ai">Console</a>. Do not share your secret API tokens in publicly accessible areas such GitHub, client-side code, and so forth.</p>
 
-<p>Authentication to the API is performed via bearer auth tokens which can be retrieved from the Console. We will never ask you to send any password while using the API.</p>
+<p>Authorization to the API is performed via bearer auth tokens which can be retrieved from the Console. We will never ask you to send any password while using the API.</p>
 
 <p>Every request must be authenticated with the your API token.</p>
 
@@ -143,16 +156,16 @@ JSON is returned by all API responses, including errors, although the API librar
 <h1 id="analyze">Analyze</h1>
 
 <p>Analyzes a given text using the classifier specified.
-You can handle your available classifiers in your <a href="http://console.lang.ai">Console</a>.</p>
+You can handle your available classifiers in your <a href="https://console.lang.ai">Console</a>.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST http://api.lang.ai/v1/analyze</code></p>
+<p><code class="prettyprint">POST https://api.lang.ai/v1/analyze</code></p>
 
 <h3 id="request-body">Request Body</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
- </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The text to be analyzed"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"classifier_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your classifier id"</span><span class="w">
+  </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The text to be analyzed"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your project id"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <table><thead>
@@ -172,19 +185,49 @@ You can handle your available classifiers in your <a href="http://console.lang.a
 <td>The text to be analyzed.</td>
 </tr>
 <tr>
-<td>classifier_id</td>
+<td>projectId</td>
 <td>true</td>
 <td>-</td>
 <td>string</td>
-<td>The id for the classifier to be used.</td>
+<td>The project to be used to analyze the text.</td>
 </tr>
 </tbody></table>
 
-<h3 id="response">Response</h3>
+<h3 id="response-body">Response Body</h3>
+
+<p>The response returns a list of zero, one or more intents. Each intent contain the following fields:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>The name of the intent.</td>
+</tr>
+<tr>
+<td>features</td>
+<td>string[]</td>
+<td>The list of features. The sign &ldquo;&gt;&rdquo; indicates a second-level feature.</td>
+</tr>
+<tr>
+<td>score</td>
+<td>number</td>
+<td>A value between 0 and 1 that indicates proximity to a given intent.</td>
+</tr>
+</tbody></table>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"paterns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"pattern1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"pattern2"</span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="s2">"intents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"intent"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"feature"</span><span class="p">,</span><span class="w"> </span><span class="s2">"feature&gt;feature"</span><span class="p">],</span><span class="w">
+        </span><span class="s2">"score"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
           <h1 id="errors">Errors</h1>
@@ -199,7 +242,7 @@ You can handle your available classifiers in your <a href="http://console.lang.a
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request / Missing Fields</td>
+<td>Bad request / Missing fields</td>
 </tr>
 <tr>
 <td>401</td>
@@ -207,15 +250,15 @@ You can handle your available classifiers in your <a href="http://console.lang.a
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found</td>
+<td>Project not found</td>
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests / Rate Limited</td>
+<td>Too many requests / Rate limited</td>
 </tr>
 <tr>
 <td>500</td>
-<td>Internal Server Error</td>
+<td>Internal server error</td>
 </tr>
 </tbody></table>
 
