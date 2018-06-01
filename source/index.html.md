@@ -2,7 +2,7 @@
 title: API Reference
 
 toc_footers:
-  - <a href='https://lang.ai'>Sign Up for a Developer Key</a>
+  - <a href='https://lang.ai/developers'>Request an API Invite</a>
 
 includes:
   - errors
@@ -12,24 +12,25 @@ search: true
 
 # Overview
 
-Lang.ai is the first unsupervised AI for language understanding. It analyzes any type of text and extracts intents without any manual training or intent-definition. This allows companies and individuals to get insights from any unstructured text to improve and automate multiple business processes. To learn more about use cases or our proprietary technology, please visit [lang.ai](https://lang.ai).
+Lang.ai is a platform to enable the next generation of NLP products and applications while using unsupervised AI. It analyzes any type of text and extracts intents without any manual training or intent-definition. This allows companies and individuals to get insights from any unstructured text to improve and automate multiple business processes. To learn more about use cases or our proprietary technology, please visit [lang.ai](https://lang.ai).
 
 # Workflow
 
 Lang.ai algorithm adapts to any language, industry or business case given the adequate training data. The typical workflow for using lang.ai API is the following:
 
 * In order to build a custom classifier model, user has to provide a dataset. This can be any collection of customer interactions or any other type of text.
-* The algorithm will automatically extract intents and features that the user can edit to further customise to her needs. This process is done in the [Console](https://console.lang.ai).
+* The algorithm will automatically extract intents and features that the user can edit to further customize to her needs. This process is done in the [Console](https://console.lang.ai).
 * Once the classifier model is validated, the lang.ai API can be used in real time to analyze intents in new texts.
 
 # The API
 
-The API is organised around REST. It has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients. JSON is returned by all API responses, including errors, although the API libraries convert responses to appropriate language-specific objects.
+The API is organized around REST. It has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients. JSON is returned by all API responses, including errors, although the API libraries convert responses to appropriate language-specific objects.
 
 All requests must be encrypted with HTTPS.
 
 The service is hosted under api.lang.ai.
 
+For more information about our API libraries and use cases, check our [Developers site](https://lang.ai/developers).
 
 # Authentication
 
@@ -64,8 +65,8 @@ You can handle your available classifiers in your [Console](https://console.lang
 
 ```json
 {
- "text": "The text to be analyzed",
- "projectId": "Your project id"
+  "text": "The text to be analyzed",
+  "projectId": "Your project id"
 }
 ```
 
@@ -74,14 +75,23 @@ Parameter | Required | Default | Type | Description
 text      | true     | -       | string | The text to be analyzed.
 projectId | true     | -       | string | The project to be used to analyze the text.
 
-### Response
+### Response Body
+
+The response returns a list of zero, one or more intents. Each intent contain the following fields:
+
+Field | Type | Description
+--------- | -------  | ------- | ---- | -----------
+name      | string | The name of the intent.
+features | string[] | The list of features. The sign ">" indicates a second-level feature.
+score | number | A value between 0 and 1 that indicates proximity to a given intent.
 
 ```json
 {
   "intents": [
   	{
-  		"name": "intent1",
-  		"features": ["feature1"]
+  		"name": "intent",
+  		"features": ["feature", "feature>feature"],
+ 		"score": 0.8
   	}
   ]
 }
