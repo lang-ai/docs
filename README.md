@@ -1,8 +1,4 @@
 # Lang.ai API docs
 
-## Development
-- Install dependencies with `bundle install`
-- Use Vagrant to run the application with `vagrant up`.
-
-## Deployment
-Make the changes on `source/index.html.md` and push them to the `master` branch. Once done, run the deploy script: `./deploy.sh`.
+## Development & Deployment
+- We are currently changing the index.html file from the `gh-pages` branch and manually uploading the whole directory to the docs S3 bucket.
