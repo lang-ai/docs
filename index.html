@@ -313,7 +313,7 @@
 
         <p>
           Saves a given document into the specified project. It supports passing
-          metadata that can be later used in the project's <a href="https://help.lang.ai/en/articles/2724433-getting-started-with-dashboards" title="Learn more about Dashboards">Dashboard</a>.
+          metadata that can be later used in the project's <a href="https://help.lang.ai/en/articles/2724433-getting-started-with-dashboards" title="Learn more about Dashboards">Dashboard</a>. New metadata values passed via API will be available to use in the project's setup section.
         </p>
 
         <h3 id="http-request">HTTP Request</h3>
@@ -328,7 +328,8 @@
         ><code><span class="p">{</span><span class="w">
   </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The text to be analyzed"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your project id"</span><span class="p">,</span><span class="w">
-  <span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">{"key": "value"}</span><span class="w"></span>
+  <span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">{"key": "value"}</span><span class="w"></span><span class="p">,</span><span class="c"> // Optional</span>
+  <span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-20-12"</span><span class="w"></span><span class="c"> // Optional</span>
 <span class="p">}</span><span class="w">
 </span></code></pre>
         <table>
@@ -362,6 +363,13 @@
               <td>-</td>
               <td>object</td>
               <td>The metadata information of the document.</td>
+            </tr>
+            <tr>
+              <td>date</td>
+              <td>false</td>
+              <td>now</td>
+              <td>string</td>
+              <td>The date of the document. It supports valid IS0 8601 dates. If not passed, the request time is used.</td>
             </tr>
           </tbody>
         </table>
