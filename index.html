@@ -214,8 +214,136 @@
           To avoid abuse and ensure that the system remains online for every
           user, every API request will need to provide valid credentials and the
           requests can be rate limited if they exceed the limitations.
-        </p>
+				</p>
 
+				<h1 id="create">Create projects</h1>
+
+				<p>
+				This API allows you to create a project by performing a single, multipart request containing both project's metadata and
+				the contents of a dataset.
+				</p>
+
+			<p>To use this multipart upload:</p>
+			<ol>
+				<li>Create a <code>POST</code> request to <code>https://company.lang.ai/api/v1/project</code>.</li>
+				<li>Create the body of the request. Format the body according to the <code>multipart/related</code> content type <a
+						href="http://tools.ietf.org/html/rfc2387" rel="nofollow">RFC 2387</a>, which contains two parts:
+					<ul>
+						<li><strong>Metadata part</strong>. Must come first, and must have a <code>Content-Type</code> header set to
+							<code>application/json; charset=UTF-8</code>. Add the classifier's metadata to this part in JSON format. See the details below.
+						</li>
+						<li><strong>Media part</strong>. Must come second, and must have a <code>Content-Type</code> header, which must
+							have either <code>text/plain</code> or <code>text/csv</code> type. Add the file's data to this part.
+							Identify each part with a boundary string, preceded by two hyphens. In addition, add two hyphens after the final
+							boundary string.</li>
+					</ul>
+				</li>
+				<li>Add the following HTTP headers:
+					<ul>
+						<li><code>Content-Type</code>: <code>multipart/related</code> and include the boundary string to identify each
+							part as a parameter (e.g.: <code>multipart/related; boundary=foo</code>).</li>
+						<li><code>Authorization</code>: <code>Bearer &lt;your-api-token&gt;</code>.</li>
+					</ul>
+				</li>
+				<li>Send the request. Upon success, you'll get a JSON with a single key <code>id</code>, containing the newly created
+					project's id.</li>
+			</ol>
+				</p>
+
+				<p>Please check our <a href="https://gist.github.com/fjaguero/5cf6721d7ea28df7d0eedab74a8a58d8" title="See demo code">Python implementation example</a> that can be used as a starting point.</p>
+
+				<h3 id="http-request">HTTP Request</h3>
+
+				<p>
+					<code class="prettyprint">POST https://company.lang.ai/api/v1/project</code>
+				</p>
+
+				<h3 id="request-body">Request Body (multipart/related)</h3>
+<pre class="highlight json"><code><span class="s2"><span class="w"># Boundary string should be replaced</span>
+b'--{boundary_string}
+Content-Type: application/json; charset=UTF-8
+{
+	"name": "My test project",
+	"csvOptions": {"textColumn": "csv_text_column", "dateColumn": "csv_date_column"},
+	"team_ids": ["team_id_one", "team_id_two"]
+}
+--{boundary_string}
+Content-Type: text/csv
+csv_text_column,csv_date_column
+First text,2018-04-25
+Second text,2018-04-25
+--{boundary_string}--
+'
+
+<span class="w"># Relevant headers</span>
+{
+	"Content-Type": "multipart/related; boundary={boundary_string}",
+	"Authorization": "Bearer API_TOKEN",
+	"Content-Length": "392"
+}
+</span></code></pre>
+
+				<table>
+					<thead>
+						<tr>
+							<th>Parameter</th>
+							<th>Required</th>
+							<th>Type</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>metadata.name</td>
+							<td>true</td>
+							<td>string</td>
+							<td>The name of the project.</td>
+						</tr>
+						<tr>
+							<td>metadata.csvOptions</td>
+							<td>true</td>
+							<td>object</td>
+							<td>Must be an object with two keys: <p><code>textColumn</code> – The name of the column from the CSV file containing each document's text.</p>
+							<p><code>dateColumn</code> – Optional: the name of the column from the CSV file that contains the document's date.</p></td>
+						</tr>
+						<tr>
+							<td>metadata.team_ids</td>
+							<td>true</td>
+							<td>string[]</td>
+							<td>The list of team id's that will have access to the project.</td>
+						</tr>
+						<tr>
+							<td>media</td>
+							<td>true</td>
+							<td>file</td>
+							<td>The data from the file to be uploaded.</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h3 id="response-body">Response Body</h3>
+
+				<p>
+					The response returns the id of the project that is being created.
+				</p>
+
+				<table>
+					<thead>
+						<tr>
+							<th>Field</th>
+							<th>Type</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>id</td>
+							<td>string</td>
+							<td>The id of the project.</td>
+						</tr>
+					</tbody>
+				</table>
+				<pre class="highlight json"><code><span class="p">{</span><span class="w"> </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_id"</span><span class="p"></span><span class="w"> </span>}</span><span class="w"> </span></code></pre>
         <h1 id="analyze">Analyze documents</h1>
 
         <p>
@@ -242,7 +370,6 @@
             <tr>
               <th>Parameter</th>
               <th>Required</th>
-              <th>Default</th>
               <th>Type</th>
               <th>Description</th>
             </tr>
@@ -251,14 +378,12 @@
             <tr>
               <td>text</td>
               <td>true</td>
-              <td>-</td>
               <td>string</td>
               <td>The text to be classified.</td>
             </tr>
             <tr>
               <td>projectId</td>
               <td>true</td>
-              <td>-</td>
               <td>string</td>
               <td>The project to be used to classify the text.</td>
             </tr>
