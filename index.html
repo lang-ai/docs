@@ -294,9 +294,9 @@ Content-Type: application/json; charset=UTF-8
 }
 --{boundary_string}
 Content-Type: text/csv
-csv_text_column,csv_date_column
-First text,2018-04-25
-Second text,2018-04-25
+csv_text_column,csv_date_column,metadata_column,another_metadata
+First text,2018-04-25,my metadata,lorem 
+Second text,2018-04-25,another metadata,ipsum
 --{boundary_string}--
 '
 
@@ -344,7 +344,7 @@ Second text,2018-04-25
             <td>media</td>
             <td>true</td>
             <td>file</td>
-            <td>The data from the file to be uploaded.</td>
+            <td>The data from the file to be uploaded. You may include extra CSV columns to be used as metadata.</td>
           </tr>
         </tbody>
       </table>
