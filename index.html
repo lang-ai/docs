@@ -726,7 +726,8 @@ Second text,2018-04-25,another metadata,ipsum
   </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The text to be analyzed"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your project id"</span><span class="p">,</span><span class="w">
   <span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">{"key": "value", "another_key": "value"}</span><span class="w"></span><span class="p">,</span><span class="c"> // Optional</span>
-  <span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-20-12"</span><span class="w"></span><span class="c"> // Optional</span>
+  <span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-20-12"</span><span class="w"></span><span class="c"> // Optional</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The ID of the document to save."</span><span class="p">,</span><span class="c"> // Optional</span>
 <span class="p">}</span><span class="w">
 </span></code></pre>
       <table>
@@ -768,6 +769,13 @@ Second text,2018-04-25,another metadata,ipsum
             <td>string</td>
             <td>The date of the document. It supports valid IS0 8601 dates. If not passed, the request time is used.
             </td>
+          </tr>
+          <tr>
+            <td>id</td>
+            <td>false</td>
+            <td>-</td>
+            <td>string</td>
+            <td>ID of the document to save. If a document with the same ID already exists, it will be overwritten.</td>
           </tr>
         </tbody>
       </table>
