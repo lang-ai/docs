@@ -47,10 +47,10 @@ Authorization to the API is performed via bearer auth tokens which can be retrie
 
 Every request must be authenticated with the your API token.
 
-
 # Rate Limit
-To avoid abuse and ensure that the system remains online for every user, every API request will need to provide valid credentials and the requests can be rate limited if they exceed the limitations.
+To avoid abuse and ensure that the system remains online for every user, every API request will need to provide valid credentials and the requests can be rate limited if they exceed the limitations. The maximum rate limit is **1000** requests per minute per public IP.
 
+You can request an limit increase by asking your account manager. Process could take sometime to review, process, approve, and deploy.  
 
 # Analyze
 
